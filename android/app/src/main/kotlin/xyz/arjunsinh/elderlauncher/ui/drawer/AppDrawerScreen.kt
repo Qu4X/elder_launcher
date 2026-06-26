@@ -15,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.geometry.Offset
@@ -99,11 +100,13 @@ fun AppDrawerScreen(
                 ) { app ->
                     val isFavorite = favoritePackageNames.contains(app.packageName)
 
+                    val view = LocalView.current
                     var currentCoords by remember { mutableStateOf<LayoutCoordinates?>(null) }
                     Surface(
                         onClick = {
                             val launchIntent = context.packageManager.getLaunchIntentForPackage(app.packageName)
                             if (launchIntent != null) {
+                                var bundle: android.os.Bundle? = null
                                 currentCoords?.let { coords ->
                                     if (coords.isAttached) {
                                         val position = coords.localToWindow(Offset.Zero)
@@ -114,9 +117,17 @@ fun AppDrawerScreen(
                                             (position.x + size.width).toInt(),
                                             (position.y + size.height).toInt()
                                         )
+                                        val options = android.app.ActivityOptions.makeScaleUpAnimation(
+                                            view,
+                                            position.x.toInt(),
+                                            position.y.toInt(),
+                                            size.width,
+                                            size.height
+                                        )
+                                        bundle = options.toBundle()
                                     }
                                 }
-                                context.startActivity(launchIntent)
+                                context.startActivity(launchIntent, bundle)
                             }
                         },
                         shape = MaterialTheme.shapes.medium,

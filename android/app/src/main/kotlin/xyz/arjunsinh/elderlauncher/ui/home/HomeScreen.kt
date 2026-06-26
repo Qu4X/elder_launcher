@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.*
 import androidx.compose.ui.draw.clip
 import xyz.arjunsinh.elderlauncher.ui.common.AutoSizeText
@@ -20,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.geometry.Offset
@@ -184,6 +186,7 @@ fun HomeScreen(
                                     key = { it.packageName }
                                 ) { app ->
                                     val context = LocalContext.current
+                                    val view = LocalView.current
                                     var currentCoords by remember { mutableStateOf<LayoutCoordinates?>(null) }
                                     ElevatedCard(
                                         modifier = Modifier
@@ -195,6 +198,7 @@ fun HomeScreen(
                                                 onClick = {
                                                     val launchIntent = context.packageManager.getLaunchIntentForPackage(app.packageName)
                                                     if (launchIntent != null) {
+                                                        var bundle: android.os.Bundle? = null
                                                         currentCoords?.let { coords ->
                                                             if (coords.isAttached) {
                                                                 val position = coords.localToWindow(Offset.Zero)
@@ -205,9 +209,17 @@ fun HomeScreen(
                                                                     (position.x + size.width).toInt(),
                                                                     (position.y + size.height).toInt()
                                                                 )
+                                                                val options = android.app.ActivityOptions.makeScaleUpAnimation(
+                                                                    view,
+                                                                    position.x.toInt(),
+                                                                    position.y.toInt(),
+                                                                    size.width,
+                                                                    size.height
+                                                                )
+                                                                bundle = options.toBundle()
                                                             }
                                                         }
-                                                        context.startActivity(launchIntent)
+                                                        context.startActivity(launchIntent, bundle)
                                                     }
                                                 },
                                                 onLongClick = { appToRemove = app }
@@ -370,7 +382,11 @@ fun HomeScreen(
                         onClick = { contactToCall = null },
                         modifier = Modifier.weight(1f).height(60.dp)
                     ) {
-                        Text(text = stringResource(R.string.dlg_cancel).uppercase(), style = MaterialTheme.typography.labelLarge)
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = stringResource(R.string.dlg_cancel),
+                            modifier = Modifier.size(28.dp)
+                        )
                     }
                     Button(
                         onClick = {
@@ -379,7 +395,11 @@ fun HomeScreen(
                         },
                         modifier = Modifier.weight(1f).height(60.dp)
                     ) {
-                        Text(text = stringResource(R.string.dlg_call).uppercase(), style = MaterialTheme.typography.labelLarge)
+                        Icon(
+                            imageVector = Icons.Default.Call,
+                            contentDescription = stringResource(R.string.dlg_call),
+                            modifier = Modifier.size(28.dp)
+                        )
                     }
                 }
             },
