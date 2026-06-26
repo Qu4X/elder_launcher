@@ -157,7 +157,8 @@ fun HomeScreen(
 
             HorizontalPager(
                 state = pagerState,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                pageSpacing = 16.dp
             ) { page ->
                 if (page == 0) {
                     // Apps Tab
