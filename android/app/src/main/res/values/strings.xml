@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Elder Launcher</string>
+    <string name="apps">Apps</string>
+    <string name="contacts">Contacts</string>
+    <string name="btn_all_apps">All Apps</string>
+    <string name="btn_all_contacts">All Contacts</string>
+    <string name="btn_add_fav_apps">Add Favourite Apps</string>
+    <string name="btn_add_fav_contacts">Add Favourite Contacts</string>
+    <string name="btn_back_to_home">Back to Home</string>
+    <string name="btn_grant_permission">Grant Permission</string>
+    <string name="btn_set_default_launcher">Set as Default</string>
+    <string name="msg_no_data">No data available. Try again in a few seconds.</string>
+    <string name="msg_no_favourites">You haven\'t added any favourites</string>
+    <string name="msg_no_contacts_permission">To add favourite contacts to this screen, allow this app access to your contacts.</string>
+    <string name="msg_no_phone_permission">To make calling easier, allow this app to start phone calls for you.</string>
+    <string name="msg_not_default_launcher">Open apps and contacts faster by making Elder Launcher the home app.</string>
+    <string name="dlg_call">Call</string>
+    <string name="dlg_edit_title">Edit Favourites</string>
+    <string name="dlg_cancel">Cancel</string>
+    <string name="dlg_open_settings">Open Settings</string>
+    <string name="dlg_apps_add_remove">Add/Remove Apps</string>
+    <string name="dlg_apps_reorder">Reorder Apps</string>
+    <string name="dlg_apps_reload">Reload App List</string>
+    <string name="dlg_contacts_add_remove">Add/Remove Contacts</string>
+    <string name="dlg_contacts_reorder">Reorder Contacts</string>
+    <string name="dlg_contacts_reload">Reload Contacts</string>
+    <string name="search_apps_hint">Search apps…</string>
+    <string name="search_contacts_hint">Search contacts…</string>
+    <string name="confirm_call_title">Place phone call?</string>
+    <string name="confirm_call_msg">Do you want to dial %1$s now?</string>
+</resources>

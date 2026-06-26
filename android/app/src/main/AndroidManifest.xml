@@ -1,18 +1,21 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="xyz.arjunsinh.elderlauncher">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-feature android:name="android.hardware.telephony" android:required="false" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />    
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
     <application
         android:label="Elder Launcher"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:extractNativeLibs="true"> <!-- Fix for certain devices. https://issuetracker.google.com/issues/127691101#comment42 -->
+        android:theme="@style/Theme.ElderLauncher"
+        android:localeConfig="@xml/locales_config"
+        android:enableOnBackInvokedCallback="true">
+        
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/LaunchTheme"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.ElderLauncher.Launch"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize"
@@ -23,12 +26,6 @@
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <meta-data
-                android:name="io.flutter.embedding.android.NormalTheme"
-                android:resource="@style/NormalTheme"/>
         </activity>
-        <meta-data
-            android:name="flutterEmbedding"
-            android:value="2" />
     </application>
 </manifest>

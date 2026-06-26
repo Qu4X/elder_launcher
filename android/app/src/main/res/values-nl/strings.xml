@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Elder Launcher</string>
+    <string name="apps">Apps</string>
+    <string name="contacts">Contacten</string>
+    <string name="btn_all_apps">Alle apps</string>
+    <string name="btn_all_contacts">Alle contacten</string>
+    <string name="btn_add_fav_apps">Voeg favoriete apps toe</string>
+    <string name="btn_add_fav_contacts">Voeg favoriete contacten toe</string>
+    <string name="btn_back_to_home">Terug</string>
+    <string name="btn_grant_permission">Toestemming verlenen</string>
+    <string name="btn_set_default_launcher">Standaard instellen</string>
+    <string name="msg_no_data">Geen gegevens beschikbaar, probeer over een paar seconden opnieuw</string>
+    <string name="msg_no_favourites">Je hebt nog geen favorieten toegevoegd</string>
+    <string name="msg_no_contacts_permission">Om favoriete contacten aan dit scherm toe te voegen, moet u deze app toegang geven tot uw contacten.</string>
+    <string name="msg_no_phone_permission">Om het bellen te vergemakkelijken, kunt u deze app telefoongesprekken voor u laten starten.</string>
+    <string name="msg_not_default_launcher">Open apps en contacten sneller door van Elder Launcher de thuis-app te maken.</string>
+    <string name="dlg_call">Bel</string>
+    <string name="dlg_edit_title">Wijzig favorieten</string>
+    <string name="dlg_cancel">Annuleer</string>
+    <string name="dlg_open_settings">Instellingen veranderen</string>
+    <string name="dlg_apps_add_remove">Toevoegen/verwijderen apps</string>
+    <string name="dlg_apps_reorder">Apps sorteren</string>
+    <string name="dlg_apps_reload">App lijst opnieuw laden</string>
+    <string name="dlg_contacts_add_remove">Toevoegen/verwijderen contacten</string>
+    <string name="dlg_contacts_reorder">Contacten sorteren</string>
+    <string name="dlg_contacts_reload">Contacten laden</string>
+    <string name="search_apps_hint">Apps zoeken…</string>
+    <string name="search_contacts_hint">Contacten zoeken…</string>
+    <string name="confirm_call_title">Bellen?</string>
+    <string name="confirm_call_msg">Wilt u nu %1$s bellen?</string>
+</resources>

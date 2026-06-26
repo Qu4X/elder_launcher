@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Elder Launcher</string>
+    <string name="apps">Aplikacje</string>
+    <string name="contacts">Kontakty</string>
+    <string name="btn_all_apps">Wszystkie Aplikacje</string>
+    <string name="btn_all_contacts">Wszystkie Kontakty</string>
+    <string name="btn_add_fav_apps">Dodaj ulubione aplikacje</string>
+    <string name="btn_add_fav_contacts">Dodaj ulubione kontakty</string>
+    <string name="btn_back_to_home">Wrócić do Domu</string>
+    <string name="btn_grant_permission">Dać Pozwolenie</string>
+    <string name="btn_set_default_launcher">Ustaw jako domyślną</string>
+    <string name="msg_no_data">Brak dostępnych danych. Spróbuj ponownie za kilka sekund.</string>
+    <string name="msg_no_favourites">Nie dodałeś żadnych ulubionych.</string>
+    <string name="msg_no_contacts_permission">Aby dodać ulubione kontakty do tego ekranu, zezwól tej aplikacji na dostęp do swoich kontaktów.</string>
+    <string name="msg_no_phone_permission">Aby ułatwić dzwonienie, zezwól tej aplikacji na nawiązywanie połączeń telefonicznych za Ciebie.</string>
+    <string name="msg_not_default_launcher">Otwieraj aplikacje i kontakty szybciej, ustawiając Elder Launcher jako aplikację domową.</string>
+    <string name="dlg_call">Zadzwoń</string>
+    <string name="dlg_edit_title">Zmień ulubione</string>
+    <string name="dlg_cancel">Anuluj</string>
+    <string name="dlg_open_settings">Zmień ustawienia</string>
+    <string name="dlg_apps_add_remove">Dodaj/Usuń aplikacje</string>
+    <string name="dlg_apps_reorder">Zmień kolejność aplikacji</string>
+    <string name="dlg_apps_reload">Załaduj ponownie listę aplikacji</string>
+    <string name="dlg_contacts_add_remove">Dodaj/Usuń kontakty</string>
+    <string name="dlg_contacts_reorder">Zmień kolejność kontaktów</string>
+    <string name="dlg_contacts_reload">Załaduj ponownie listę kontaktów</string>
+    <string name="search_apps_hint">Szukaj aplikacji…</string>
+    <string name="search_contacts_hint">Szukaj kontaktów…</string>
+    <string name="confirm_call_title">Zadzwoń?</string>
+    <string name="confirm_call_msg">Czy chcesz zadzwonić do %1$s?</string>
+</resources>

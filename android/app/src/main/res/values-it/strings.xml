@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Elder Launcher</string>
+    <string name="apps">Apps</string>
+    <string name="contacts">Contatti</string>
+    <string name="btn_all_apps">Tutte le App</string>
+    <string name="btn_all_contacts">Tutti contatti</string>
+    <string name="btn_add_fav_apps">Aggiungi app preferite</string>
+    <string name="btn_add_fav_contacts">Aggiungi contatti preferiti</string>
+    <string name="btn_back_to_home">Indietro</string>
+    <string name="btn_grant_permission">Dai il permesso</string>
+    <string name="btn_set_default_launcher">Imposta come predefinito</string>
+    <string name="msg_no_data">Non ci sono dei dati. Prego riprovare tra pochi secondi.</string>
+    <string name="msg_no_favourites">Lei non ha aggiunto dei preferiti</string>
+    <string name="msg_no_contacts_permission">Per aggiungere contatti preferiti a questa schermata, pergo dare i permessi per accedere ai contatti.</string>
+    <string name="msg_no_phone_permission">Abilita l\'app a fare chiamate.</string>
+    <string name="msg_not_default_launcher">Apri app e contatti più velocemente, impostando Elder Launcher come Home-App.</string>
+    <string name="dlg_call">Chiamare</string>
+    <string name="dlg_edit_title">Modificare preferiti</string>
+    <string name="dlg_cancel">Annulla</string>
+    <string name="dlg_apps_add_remove">Aggiungi/rimuovi app</string>
+    <string name="dlg_apps_reorder">Riorganizza le app</string>
+    <string name="dlg_apps_reload">Ricarica la lista delle app</string>
+    <string name="dlg_contacts_add_remove">Aggiungi/rimuovi contatti</string>
+    <string name="dlg_contacts_reorder">Riorganizza i contatti</string>
+    <string name="dlg_contacts_reload">Ricarica la lista dei contatti</string>
+    <string name="search_apps_hint">Cerca applicazioni…</string>
+    <string name="search_contacts_hint">Cerca contatti…</string>
+    <string name="confirm_call_title">Effettuare la chiamata?</string>
+    <string name="confirm_call_msg">Vuoi chiamare %1$s ora?</string>
+</resources>

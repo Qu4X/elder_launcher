@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Elder Launcher</string>
+    <string name="apps">Apps</string>
+    <string name="contacts">Contacts</string>
+    <string name="btn_all_apps">All Apps</string>
+    <string name="btn_all_contacts">All Contacts</string>
+    <string name="btn_add_fav_apps">Ajouter des apps favorites</string>
+    <string name="btn_add_fav_contacts">Ajouter des contacts favoris</string>
+    <string name="btn_back_to_home">retourner</string>
+    <string name="btn_grant_permission">Donner la permission</string>
+    <string name="btn_set_default_launcher">Définir par défaut</string>
+    <string name="msg_no_data">Pas de données disponibles. Réessayez dans quelques secondes.</string>
+    <string name="msg_no_favourites">Vous n\'avez ajouté aucun favori</string>
+    <string name="msg_no_contacts_permission">Pour ajouter des contacts favoris à cet écran, autorisez cette application à accéder à vos contacts.</string>
+    <string name="msg_no_phone_permission">Pour faciliter les appels, autorisez cette application à démarrer des appels téléphoniques à votre place.</string>
+    <string name="msg_not_default_launcher">Ouvrez les applications et les contacts plus rapidement en faisant d\'Elder Launcher l\'application domestique.</string>
+    <string name="dlg_call">Téléphoner</string>
+    <string name="dlg_edit_title">Modifier les favoris</string>
+    <string name="dlg_cancel">Annuler</string>
+    <string name="dlg_open_settings">Modifier les paramètres</string>
+    <string name="dlg_apps_add_remove">Ajouter/supprimer des Apps</string>
+    <string name="dlg_apps_reorder">Réorganiser les Apps</string>
+    <string name="dlg_apps_reload">Recharger la liste des Apps</string>
+    <string name="dlg_contacts_add_remove">Ajouter/supprimer des Contacts</string>
+    <string name="dlg_contacts_reorder">Réorganiser les Contacts</string>
+    <string name="dlg_contacts_reload">Recharger la liste de contacts</string>
+    <string name="search_apps_hint">Rechercher des applications…</string>
+    <string name="search_contacts_hint">Rechercher des contacts…</string>
+    <string name="confirm_call_title">Passer un appel ?</string>
+    <string name="confirm_call_msg">Voulez-vous appeler %1$s maintenant ?</string>
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Elder Launcher</string>
+    <string name="apps">программы</string>
+    <string name="contacts">контакты</string>
+    <string name="btn_all_apps">Все программы</string>
+    <string name="btn_all_contacts">Все контакты</string>
+    <string name="btn_add_fav_apps">Добавить любимые программы</string>
+    <string name="btn_add_fav_contacts">Добавить избранные контакты</string>
+    <string name="btn_back_to_home">Вернуться домой</string>
+    <string name="btn_grant_permission">Предоставить разрешение</string>
+    <string name="btn_set_default_launcher">По умолчанию</string>
+    <string name="msg_no_data">Данные недоступны. Попробуйте еще раз через несколько секунд.</string>
+    <string name="msg_no_favourites">Вы не добавили ни одного избранного</string>
+    <string name="msg_no_contacts_permission">Чтобы добавить избранные контакты на этот экран, разрешите этому приложению доступ к вашим контактам.</string>
+    <string name="msg_no_phone_permission">Чтобы сделать звонки проще, позвольте этому приложению начинать телефонные звонки для вас.</string>
+    <string name="msg_not_default_launcher">Открывайте приложения и контакты быстрее, сделав Elder Launcher домашним приложением.</string>
+    <string name="dlg_call">звонок</string>
+    <string name="dlg_edit_title">Редактировать избранное</string>
+    <string name="dlg_cancel">Отмена</string>
+    <string name="dlg_open_settings">Изменить настройки</string>
+    <string name="dlg_apps_add_remove">Добавить/удалять программы</string>
+    <string name="dlg_apps_reorder">Изменение порядка программы</string>
+    <string name="dlg_apps_reload">Перезагрузить список программы</string>
+    <string name="dlg_contacts_add_remove">Добавить/удалять контакты</string>
+    <string name="dlg_contacts_reorder">Изменение порядка контакты</string>
+    <string name="dlg_contacts_reload">Перезагрузить список контактов</string>
+    <string name="search_apps_hint">Поиск приложений…</string>
+    <string name="search_contacts_hint">Поиск контактов…</string>
+    <string name="confirm_call_title">Позвонить?</string>
+    <string name="confirm_call_msg">Хотите позвонить %1$s сейчас?</string>
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Elder Launcher</string>
+    <string name="apps">Apps</string>
+    <string name="contacts">Kontakte</string>
+    <string name="btn_all_apps">Alle Apps</string>
+    <string name="btn_all_contacts">Alle Kontakte</string>
+    <string name="btn_add_fav_apps">Favorisierte Apps hinzufügen</string>
+    <string name="btn_add_fav_contacts">Favorisierte Kontakte hinzufügen</string>
+    <string name="btn_back_to_home">Zurück</string>
+    <string name="btn_grant_permission">Erlaubnis erteilen</string>
+    <string name="btn_set_default_launcher">Als Standard festlegen</string>
+    <string name="msg_no_data">Keine Daten verfügbar. Versuchen Sie es in wenigen Sekunden erneut.</string>
+    <string name="msg_no_favourites">Sie haben keine Favoriten hinzugefügt</string>
+    <string name="msg_no_contacts_permission">Um diesem Bildschirm favorisierte Kontakte hinzuzufügen, erlauben Sie dieser App den Zugriff auf Ihre Kontakte.</string>
+    <string name="msg_no_phone_permission">Ermöglichen Sie dieser App, Anrufe für Sie zu starten, um das Telefonieren zu vereinfachen.</string>
+    <string name="msg_not_default_launcher">Öffnen Sie Apps und Kontakte schneller, indem Sie Elder Launcher zur Heim-App machen.</string>
+    <string name="dlg_call">Anrufen</string>
+    <string name="dlg_edit_title">Favoriten bearbeiten</string>
+    <string name="dlg_cancel">Abbrechen</string>
+    <string name="dlg_open_settings">Einstellungen ändern</string>
+    <string name="dlg_apps_add_remove">Apps hinzufügen/entfernen</string>
+    <string name="dlg_apps_reorder">Apps neu anordnen</string>
+    <string name="dlg_apps_reload">App Liste neu laden</string>
+    <string name="dlg_contacts_add_remove">Kontakte hinzufügen/entfernen</string>
+    <string name="dlg_contacts_reorder">Kontakte neu anordnen</string>
+    <string name="dlg_contacts_reload">Kontaktliste neu laden</string>
+    <string name="search_apps_hint">Apps suchen…</string>
+    <string name="search_contacts_hint">Kontakte suchen…</string>
+    <string name="confirm_call_title">Anrufen?</string>
+    <string name="confirm_call_msg">Möchten Sie jetzt %1$s anrufen?</string>
+</resources>
