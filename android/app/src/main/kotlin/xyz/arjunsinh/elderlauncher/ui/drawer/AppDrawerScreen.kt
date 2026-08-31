@@ -7,6 +7,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Search
@@ -87,6 +90,21 @@ fun AppDrawerScreen(
                 onActiveChange = {},
                 placeholder = { Text(text = stringResource(R.string.search_apps_hint), style = MaterialTheme.typography.bodyLarge) },
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, modifier = Modifier.size(24.dp)) },
+                trailingIcon = {
+                    AnimatedVisibility(
+                        visible = searchQuery.isNotEmpty(),
+                        enter = fadeIn(animationSpec = spring(stiffness = Spring.StiffnessMediumLow)) + scaleIn(animationSpec = spring(stiffness = Spring.StiffnessMediumLow)),
+                        exit = fadeOut(animationSpec = spring(stiffness = Spring.StiffnessMedium)) + scaleOut(animationSpec = spring(stiffness = Spring.StiffnessMedium))
+                    ) {
+                        IconButton(onClick = { searchQuery = "" }) {
+                            Icon(
+                                imageVector = Icons.Default.Close,
+                                contentDescription = stringResource(R.string.dlg_cancel),
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                    }
+                },
                 modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
             ) {}
 
@@ -134,7 +152,12 @@ fun AppDrawerScreen(
                         color = MaterialTheme.colorScheme.surfaceVariant,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .animateItemPlacement()
+                            .animateItemPlacement(
+                                animationSpec = spring(
+                                    dampingRatio = Spring.DampingRatioLowBouncy,
+                                    stiffness = Spring.StiffnessMediumLow
+                                )
+                            )
                             .onGloballyPositioned { currentCoords = it }
                     ) {
                         ListItem(

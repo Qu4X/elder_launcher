@@ -20,7 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -171,8 +171,8 @@ class MainActivity : ComponentActivity() {
                         // 2. Overlay App Drawer
                         AnimatedVisibility(
                             visible = currentScreen == Screen.AllApps,
-                            enter = slideInVertically(animationSpec = tween(300)) { it } + fadeIn(animationSpec = tween(300)),
-                            exit = slideOutVertically(animationSpec = tween(300)) { it } + fadeOut(animationSpec = tween(300))
+                            enter = slideInVertically(animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow)) { it } + fadeIn(animationSpec = spring(stiffness = Spring.StiffnessMediumLow)),
+                            exit = slideOutVertically(animationSpec = spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessMedium)) { it } + fadeOut(animationSpec = spring(stiffness = Spring.StiffnessMedium))
                         ) {
                             AppDrawerScreen(
                                 allApps = allApps,
@@ -191,8 +191,8 @@ class MainActivity : ComponentActivity() {
                         // 3. Overlay Contact Drawer
                         AnimatedVisibility(
                             visible = currentScreen == Screen.AllContacts,
-                            enter = slideInVertically(animationSpec = tween(300)) { it } + fadeIn(animationSpec = tween(300)),
-                            exit = slideOutVertically(animationSpec = tween(300)) { it } + fadeOut(animationSpec = tween(300))
+                            enter = slideInVertically(animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessMediumLow)) { it } + fadeIn(animationSpec = spring(stiffness = Spring.StiffnessMediumLow)),
+                            exit = slideOutVertically(animationSpec = spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessMedium)) { it } + fadeOut(animationSpec = spring(stiffness = Spring.StiffnessMedium))
                         ) {
                             if (hasPermission(Manifest.permission.READ_CONTACTS)) {
                                 ContactDrawerScreen(

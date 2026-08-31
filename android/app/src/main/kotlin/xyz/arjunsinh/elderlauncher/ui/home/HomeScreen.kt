@@ -1,5 +1,6 @@
 package xyz.arjunsinh.elderlauncher.ui.home
 
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
@@ -193,7 +194,12 @@ fun HomeScreen(
                                         modifier = Modifier
                                             .fillMaxWidth()
                                             .height(130.dp)
-                                            .animateItemPlacement()
+                                            .animateItemPlacement(
+                                                animationSpec = spring(
+                                                    dampingRatio = Spring.DampingRatioLowBouncy,
+                                                    stiffness = Spring.StiffnessMediumLow
+                                                )
+                                            )
                                             .onGloballyPositioned { currentCoords = it }
                                             .combinedClickable(
                                                 onClick = {
@@ -295,7 +301,12 @@ fun HomeScreen(
                                         modifier = Modifier
                                             .fillMaxWidth()
                                             .height(130.dp)
-                                            .animateItemPlacement()
+                                            .animateItemPlacement(
+                                                animationSpec = spring(
+                                                    dampingRatio = Spring.DampingRatioLowBouncy,
+                                                    stiffness = Spring.StiffnessMediumLow
+                                                )
+                                            )
                                             .combinedClickable(
                                                 onClick = { contactToCall = contact },
                                                 onLongClick = { contactToRemove = contact }
