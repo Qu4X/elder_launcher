@@ -7,7 +7,10 @@ import androidx.compose.runtime.Immutable
 @Immutable
 data class LauncherApp(
     val packageName: String,
+    val activityName: String = "",
     val label: String,
     val resolveInfo: ResolveInfo,
     val icon: Drawable? = null
-)
+) {
+    val key: String get() = if (activityName.isNotEmpty()) "$packageName/$activityName" else packageName
+}

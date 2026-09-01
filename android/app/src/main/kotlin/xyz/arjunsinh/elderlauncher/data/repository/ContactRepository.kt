@@ -35,12 +35,13 @@ class ContactRepository(private val context: Context) {
             e.printStackTrace()
         }
 
-        // Deduplicate contacts by normalized phone number to handle formatting variations (spaces, dashes, etc.)
+        // Deduplicate contacts by normalized phone number or unique key to handle formatting variations
         val deduplicatedList = mutableListOf<FavoriteContact>()
-        val seenNumbers = mutableSetOf<String>()
+        val seenKeys = mutableSetOf<String>()
         for (contact in contactList) {
             val normalized = normalizePhoneNumber(contact.phoneNumber)
-            if (seenNumbers.add(normalized)) {
+            val uniqueKey = if (normalized.isNotEmpty()) normalized else contact.key
+            if (seenKeys.add(uniqueKey)) {
                 deduplicatedList.add(contact)
             }
         }

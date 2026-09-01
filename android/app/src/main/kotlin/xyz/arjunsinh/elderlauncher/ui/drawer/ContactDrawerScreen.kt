@@ -112,7 +112,7 @@ fun ContactDrawerScreen(
             ) {
                 items(
                     items = filteredContacts,
-                    key = { it.phoneNumber }
+                    key = { it.key }
                 ) { contact ->
                     val isFavorite = favoritePhoneNumbers.contains(contact.phoneNumber)
                     Surface(

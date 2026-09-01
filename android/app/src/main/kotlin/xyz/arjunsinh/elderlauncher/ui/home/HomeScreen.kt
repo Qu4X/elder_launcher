@@ -185,7 +185,7 @@ fun HomeScreen(
                             ) {
                                 items(
                                     items = favoriteApps,
-                                    key = { it.packageName }
+                                    key = { it.key }
                                 ) { app ->
                                     val context = LocalContext.current
                                     val view = LocalView.current
@@ -203,7 +203,15 @@ fun HomeScreen(
                                             .onGloballyPositioned { currentCoords = it }
                                             .combinedClickable(
                                                 onClick = {
-                                                    val launchIntent = context.packageManager.getLaunchIntentForPackage(app.packageName)
+                                                    val launchIntent = if (app.activityName.isNotEmpty()) {
+                                                        android.content.Intent(android.content.Intent.ACTION_MAIN).apply {
+                                                            addCategory(android.content.Intent.CATEGORY_LAUNCHER)
+                                                            component = android.content.ComponentName(app.packageName, app.activityName)
+                                                            flags = android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+                                                        }
+                                                    } else {
+                                                        context.packageManager.getLaunchIntentForPackage(app.packageName)
+                                                    }
                                                     if (launchIntent != null) {
                                                         var bundle: android.os.Bundle? = null
                                                         currentCoords?.let { coords ->
@@ -295,7 +303,7 @@ fun HomeScreen(
                             ) {
                                 items(
                                     items = favoriteContacts,
-                                    key = { it.phoneNumber }
+                                    key = { it.key }
                                 ) { contact ->
                                     ElevatedCard(
                                         modifier = Modifier

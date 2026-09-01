@@ -114,7 +114,7 @@ fun AppDrawerScreen(
             ) {
                 items(
                     items = filteredApps,
-                    key = { it.packageName }
+                    key = { it.key }
                 ) { app ->
                     val isFavorite = favoritePackageNames.contains(app.packageName)
 
@@ -122,7 +122,15 @@ fun AppDrawerScreen(
                     var currentCoords by remember { mutableStateOf<LayoutCoordinates?>(null) }
                     Surface(
                         onClick = {
-                            val launchIntent = context.packageManager.getLaunchIntentForPackage(app.packageName)
+                            val launchIntent = if (app.activityName.isNotEmpty()) {
+                                android.content.Intent(android.content.Intent.ACTION_MAIN).apply {
+                                    addCategory(android.content.Intent.CATEGORY_LAUNCHER)
+                                    component = android.content.ComponentName(app.packageName, app.activityName)
+                                    flags = android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+                                }
+                            } else {
+                                context.packageManager.getLaunchIntentForPackage(app.packageName)
+                            }
                             if (launchIntent != null) {
                                 var bundle: android.os.Bundle? = null
                                 currentCoords?.let { coords ->

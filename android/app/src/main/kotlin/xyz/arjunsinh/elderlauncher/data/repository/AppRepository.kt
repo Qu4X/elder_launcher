@@ -14,13 +14,15 @@ class AppRepository(private val context: Context) {
         val intent = Intent(Intent.ACTION_MAIN, null).apply {
             addCategory(Intent.CATEGORY_LAUNCHER)
         }
-        packageManager.queryIntentActivities(intent, 0).map { resolveInfo ->
+        val apps = packageManager.queryIntentActivities(intent, 0).map { resolveInfo ->
             LauncherApp(
                 packageName = resolveInfo.activityInfo.packageName,
+                activityName = resolveInfo.activityInfo.name ?: "",
                 label = resolveInfo.loadLabel(packageManager).toString(),
                 resolveInfo = resolveInfo,
                 icon = resolveInfo.loadIcon(packageManager)
             )
-        }.sortedBy { it.label.lowercase() }
+        }
+        apps.distinctBy { it.key }.sortedBy { it.label.lowercase() }
     }
 }
