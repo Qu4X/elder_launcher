@@ -33,6 +33,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import xyz.arjunsinh.elderlauncher.data.model.FavoriteContact
+import xyz.arjunsinh.elderlauncher.data.model.IconShape
 import xyz.arjunsinh.elderlauncher.ui.drawer.AppDrawerScreen
 import xyz.arjunsinh.elderlauncher.ui.drawer.ContactDrawerScreen
 import xyz.arjunsinh.elderlauncher.ui.home.HomeScreen
@@ -125,6 +126,7 @@ class MainActivity : ComponentActivity() {
             val favoriteContactNumbers by remember(favoriteContacts) {
                 derivedStateOf { favoriteContacts.map { it.phoneNumber }.toSet() }
             }
+            val iconShape by homeViewModel.iconShape.collectAsStateWithLifecycle(IconShape.Circle)
 
             // Check contact permission in UI scope
             val hasContactsPermission = remember {
@@ -165,7 +167,9 @@ class MainActivity : ComponentActivity() {
                             },
                             onCallContact = { contact -> handleCallAction(contact) },
                             onRemoveApp = { app -> homeViewModel.removeFavoriteApp(app.packageName) },
-                            onRemoveContact = { contact -> homeViewModel.removeFavoriteContact(contact.phoneNumber) }
+                            onRemoveContact = { contact -> homeViewModel.removeFavoriteContact(contact.phoneNumber) },
+                            iconShape = iconShape,
+                            onSetIconShape = { homeViewModel.setIconShape(it) }
                         )
 
                         // 2. Overlay App Drawer
@@ -184,7 +188,8 @@ class MainActivity : ComponentActivity() {
                                         homeViewModel.addFavoriteApp(app.packageName)
                                     }
                                 },
-                                onBack = { currentScreen = Screen.Home }
+                                onBack = { currentScreen = Screen.Home },
+                                iconShape = iconShape
                             )
                         }
 

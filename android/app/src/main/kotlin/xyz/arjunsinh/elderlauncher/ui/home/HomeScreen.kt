@@ -2,8 +2,11 @@ package xyz.arjunsinh.elderlauncher.ui.home
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.filled.Settings
+import xyz.arjunsinh.elderlauncher.data.model.IconShape
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -50,7 +53,9 @@ fun HomeScreen(
     onOpenAllContacts: () -> Unit,
     onCallContact: (FavoriteContact) -> Unit,
     onRemoveApp: (LauncherApp) -> Unit,
-    onRemoveContact: (FavoriteContact) -> Unit
+    onRemoveContact: (FavoriteContact) -> Unit,
+    iconShape: IconShape = IconShape.Circle,
+    onSetIconShape: (IconShape) -> Unit = {}
 ) {
     val configuration = LocalConfiguration.current
     val columnCount = remember(configuration.screenWidthDp) {
@@ -60,6 +65,7 @@ fun HomeScreen(
     var appToRemove by remember { mutableStateOf<LauncherApp?>(null) }
     var contactToRemove by remember { mutableStateOf<FavoriteContact?>(null) }
     var contactToCall by remember { mutableStateOf<FavoriteContact?>(null) }
+    var showSettingsDialog by remember { mutableStateOf(false) }
 
     // Swipeable pager state
     val pagerState = rememberPagerState(initialPage = selectedTab, pageCount = { 2 })
@@ -85,25 +91,43 @@ fun HomeScreen(
                 .padding(paddingValues)
                 .padding(horizontal = 16.dp)
         ) {
-            // Elegant, Large M3 Clock and Date
-            Column(
+            // Elegant, Large M3 Clock and Date with Settings button
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .padding(vertical = 16.dp)
             ) {
-                Text(
-                    text = currentTime,
-                    style = MaterialTheme.typography.displayLarge,
-                    fontSize = 64.sp,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = currentDate,
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = currentTime,
+                        style = MaterialTheme.typography.displayLarge,
+                        fontSize = 64.sp,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = currentDate,
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+
+                IconButton(
+                    onClick = { showSettingsDialog = true },
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .size(48.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Settings,
+                        contentDescription = "Settings",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(28.dp)
+                    )
+                }
             }
 
             // Default Launcher Banner
@@ -253,7 +277,9 @@ fun HomeScreen(
                                             AsyncImage(
                                                 model = app.icon,
                                                 contentDescription = app.label,
-                                                modifier = Modifier.size(56.dp)
+                                                modifier = Modifier
+                                                    .size(56.dp)
+                                                    .clip(iconShape.shape)
                                             )
                                             Spacer(modifier = Modifier.height(8.dp))
                                             Text(
@@ -488,6 +514,44 @@ fun HomeScreen(
                 }
             },
             dismissButton = null
+        )
+    }
+
+    // Settings Dialog
+    if (showSettingsDialog) {
+        AlertDialog(
+            onDismissRequest = { showSettingsDialog = false },
+            title = { Text(text = "Launcher Settings", style = MaterialTheme.typography.titleLarge) },
+            text = {
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    Text(
+                        text = "Icon Shape",
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+                    IconShape.entries.forEach { shape ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { onSetIconShape(shape) }
+                                .padding(vertical = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = iconShape == shape,
+                                onClick = { onSetIconShape(shape) }
+                            )
+                            Spacer(modifier = Modifier.width(12.dp))
+                            Text(text = shape.label, style = MaterialTheme.typography.bodyLarge)
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showSettingsDialog = false }) {
+                    Text(text = stringResource(android.R.string.ok))
+                }
+            }
         )
     }
 }

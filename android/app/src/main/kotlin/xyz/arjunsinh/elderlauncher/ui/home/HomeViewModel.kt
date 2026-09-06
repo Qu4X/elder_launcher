@@ -7,6 +7,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import xyz.arjunsinh.elderlauncher.data.model.FavoriteContact
+import xyz.arjunsinh.elderlauncher.data.model.IconShape
 import xyz.arjunsinh.elderlauncher.data.model.LauncherApp
 import xyz.arjunsinh.elderlauncher.data.repository.AppRepository
 import xyz.arjunsinh.elderlauncher.data.repository.ContactRepository
@@ -113,6 +114,15 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             val current = preferencesRepo.favoriteContactsFlow.first().toMutableSet()
             current.remove(phoneNumber)
             preferencesRepo.saveFavoriteContacts(current)
+        }
+    }
+
+    val iconShape: StateFlow<IconShape> = preferencesRepo.iconShapeFlow
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), IconShape.Circle)
+
+    fun setIconShape(shape: IconShape) {
+        viewModelScope.launch {
+            preferencesRepo.saveIconShape(shape)
         }
     }
 }

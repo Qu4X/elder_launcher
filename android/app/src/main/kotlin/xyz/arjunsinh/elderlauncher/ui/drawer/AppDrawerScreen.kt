@@ -26,6 +26,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import androidx.compose.ui.draw.clip
+import xyz.arjunsinh.elderlauncher.data.model.IconShape
 import xyz.arjunsinh.elderlauncher.R
 import xyz.arjunsinh.elderlauncher.data.model.LauncherApp
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -36,7 +38,8 @@ fun AppDrawerScreen(
     allApps: List<LauncherApp>,
     favoritePackageNames: Set<String>,
     onToggleFavorite: (LauncherApp) -> Unit,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    iconShape: IconShape = IconShape.Circle
 ) {
     var searchQuery by remember { mutableStateOf("") }
     val context = LocalContext.current
@@ -157,7 +160,8 @@ fun AppDrawerScreen(
                                 context.startActivity(launchIntent, bundle)
                             }
                         },
-                        onToggleFavorite = { onToggleFavorite(app) }
+                        onToggleFavorite = { onToggleFavorite(app) },
+                        iconShape = iconShape
                     )
                 }
             }
@@ -171,6 +175,7 @@ private fun AppDrawerItem(
     isFavorite: Boolean,
     onLaunchApp: (LayoutCoordinates?) -> Unit,
     onToggleFavorite: () -> Unit,
+    iconShape: IconShape,
     modifier: Modifier = Modifier
 ) {
     val coordsRef = remember { arrayOfNulls<LayoutCoordinates>(1) }
@@ -197,7 +202,9 @@ private fun AppDrawerItem(
                         .crossfade(false)
                         .build(),
                     contentDescription = app.label,
-                    modifier = Modifier.size(56.dp)
+                    modifier = Modifier
+                        .size(56.dp)
+                        .clip(iconShape.shape)
                 )
             },
             trailingContent = {
