@@ -115,75 +115,82 @@ fun ContactDrawerScreen(
                     key = { it.key }
                 ) { contact ->
                     val isFavorite = favoritePhoneNumbers.contains(contact.phoneNumber)
-                    Surface(
-                        shape = MaterialTheme.shapes.medium,
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .animateItemPlacement(
-                                animationSpec = spring(
-                                    dampingRatio = Spring.DampingRatioLowBouncy,
-                                    stiffness = Spring.StiffnessMediumLow
-                                )
-                            )
-                    ) {
-                        ListItem(
-                            headlineContent = {
-                                Text(
-                                    text = contact.name,
-                                    style = MaterialTheme.typography.bodyLarge
-                                )
-                            },
-                            supportingContent = {
-                                Text(
-                                    text = contact.phoneNumber,
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            },
-                            leadingContent = {
-                                if (contact.photoUri != null) {
-                                    AsyncImage(
-                                        model = contact.photoUri,
-                                        contentDescription = contact.name,
-                                        modifier = Modifier.size(56.dp).clip(CircleShape)
-                                    )
-                                } else {
-                                    Surface(
-                                        shape = CircleShape,
-                                        color = MaterialTheme.colorScheme.primaryContainer,
-                                        modifier = Modifier.size(56.dp)
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Default.Call,
-                                            contentDescription = null,
-                                            modifier = Modifier.padding(12.dp),
-                                            tint = MaterialTheme.colorScheme.onPrimaryContainer
-                                        )
-                                    }
-                                }
-                            },
-                            trailingContent = {
-                                IconButton(
-                                    onClick = { onToggleFavorite(contact) },
-                                    modifier = Modifier.size(48.dp)
-                                ) {
-                                    Icon(
-                                        imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                                        contentDescription = "Toggle Favorite",
-                                        tint = if (isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
-                                        modifier = Modifier.size(32.dp)
-                                    )
-                                }
-                            },
-                            colors = ListItemDefaults.colors(
-                                containerColor = MaterialTheme.colorScheme.surfaceVariant
-                            ),
-                            modifier = Modifier.padding(vertical = 4.dp)
-                        )
-                    }
+                    ContactDrawerItem(
+                        contact = contact,
+                        isFavorite = isFavorite,
+                        onToggleFavorite = { onToggleFavorite(contact) }
+                    )
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun ContactDrawerItem(
+    contact: FavoriteContact,
+    isFavorite: Boolean,
+    onToggleFavorite: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = modifier.fillMaxWidth()
+    ) {
+        ListItem(
+            headlineContent = {
+                Text(
+                    text = contact.name,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            },
+            supportingContent = {
+                Text(
+                    text = contact.phoneNumber,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            },
+            leadingContent = {
+                if (contact.photoUri != null) {
+                    AsyncImage(
+                        model = contact.photoUri,
+                        contentDescription = contact.name,
+                        modifier = Modifier.size(56.dp).clip(CircleShape)
+                    )
+                } else {
+                    Surface(
+                        shape = CircleShape,
+                        color = MaterialTheme.colorScheme.primaryContainer,
+                        modifier = Modifier.size(56.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Call,
+                            contentDescription = null,
+                            modifier = Modifier.padding(12.dp),
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
+                }
+            },
+            trailingContent = {
+                IconButton(
+                    onClick = onToggleFavorite,
+                    modifier = Modifier.size(48.dp)
+                ) {
+                    Icon(
+                        imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                        contentDescription = "Toggle Favorite",
+                        tint = if (isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(32.dp)
+                    )
+                }
+            },
+            colors = ListItemDefaults.colors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant
+            ),
+            modifier = Modifier.padding(vertical = 4.dp)
+        )
     }
 }

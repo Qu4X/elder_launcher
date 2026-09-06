@@ -25,6 +25,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import xyz.arjunsinh.elderlauncher.R
 import xyz.arjunsinh.elderlauncher.data.model.LauncherApp
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -108,6 +109,7 @@ fun AppDrawerScreen(
                 modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
             ) {}
 
+            val view = LocalView.current
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.weight(1f)
@@ -117,11 +119,10 @@ fun AppDrawerScreen(
                     key = { it.key }
                 ) { app ->
                     val isFavorite = favoritePackageNames.contains(app.packageName)
-
-                    val view = LocalView.current
-                    var currentCoords by remember { mutableStateOf<LayoutCoordinates?>(null) }
-                    Surface(
-                        onClick = {
+                    AppDrawerItem(
+                        app = app,
+                        isFavorite = isFavorite,
+                        onLaunchApp = { coords ->
                             val launchIntent = if (app.activityName.isNotEmpty()) {
                                 android.content.Intent(android.content.Intent.ACTION_MAIN).apply {
                                     addCategory(android.content.Intent.CATEGORY_LAUNCHER)
@@ -133,10 +134,10 @@ fun AppDrawerScreen(
                             }
                             if (launchIntent != null) {
                                 var bundle: android.os.Bundle? = null
-                                currentCoords?.let { coords ->
-                                    if (coords.isAttached) {
-                                        val position = coords.localToWindow(Offset.Zero)
-                                        val size = coords.size
+                                coords?.let { c ->
+                                    if (c.isAttached) {
+                                        val position = c.localToWindow(Offset.Zero)
+                                        val size = c.size
                                         launchIntent.sourceBounds = android.graphics.Rect(
                                             position.x.toInt(),
                                             position.y.toInt(),
@@ -156,53 +157,66 @@ fun AppDrawerScreen(
                                 context.startActivity(launchIntent, bundle)
                             }
                         },
-                        shape = MaterialTheme.shapes.medium,
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .animateItemPlacement(
-                                animationSpec = spring(
-                                    dampingRatio = Spring.DampingRatioLowBouncy,
-                                    stiffness = Spring.StiffnessMediumLow
-                                )
-                            )
-                            .onGloballyPositioned { currentCoords = it }
-                    ) {
-                        ListItem(
-                            headlineContent = {
-                                Text(
-                                    text = app.label,
-                                    style = MaterialTheme.typography.bodyLarge
-                                )
-                            },
-                            leadingContent = {
-                                AsyncImage(
-                                    model = app.icon,
-                                    contentDescription = app.label,
-                                    modifier = Modifier.size(56.dp)
-                                )
-                            },
-                            trailingContent = {
-                                IconButton(
-                                    onClick = { onToggleFavorite(app) },
-                                    modifier = Modifier.size(48.dp)
-                                ) {
-                                    Icon(
-                                        imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                                        contentDescription = "Toggle Favorite",
-                                        tint = if (isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
-                                        modifier = Modifier.size(32.dp)
-                                    )
-                                }
-                            },
-                            colors = ListItemDefaults.colors(
-                                containerColor = MaterialTheme.colorScheme.surfaceVariant
-                            ),
-                            modifier = Modifier.padding(vertical = 4.dp)
-                        )
-                    }
+                        onToggleFavorite = { onToggleFavorite(app) }
+                    )
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun AppDrawerItem(
+    app: LauncherApp,
+    isFavorite: Boolean,
+    onLaunchApp: (LayoutCoordinates?) -> Unit,
+    onToggleFavorite: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val coordsRef = remember { arrayOfNulls<LayoutCoordinates>(1) }
+
+    Surface(
+        onClick = { onLaunchApp(coordsRef[0]) },
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = modifier
+            .fillMaxWidth()
+            .onGloballyPositioned { coordsRef[0] = it }
+    ) {
+        ListItem(
+            headlineContent = {
+                Text(
+                    text = app.label,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            },
+            leadingContent = {
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(app.icon)
+                        .crossfade(false)
+                        .build(),
+                    contentDescription = app.label,
+                    modifier = Modifier.size(56.dp)
+                )
+            },
+            trailingContent = {
+                IconButton(
+                    onClick = onToggleFavorite,
+                    modifier = Modifier.size(48.dp)
+                ) {
+                    Icon(
+                        imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                        contentDescription = "Toggle Favorite",
+                        tint = if (isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(32.dp)
+                    )
+                }
+            },
+            colors = ListItemDefaults.colors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant
+            ),
+            modifier = Modifier.padding(vertical = 4.dp)
+        )
     }
 }
