@@ -21,7 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.background
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import xyz.arjunsinh.elderlauncher.R
 import xyz.arjunsinh.elderlauncher.data.model.FavoriteContact
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -133,6 +137,7 @@ private fun ContactDrawerItem(
     onToggleFavorite: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     Surface(
         shape = MaterialTheme.shapes.medium,
         color = MaterialTheme.colorScheme.surfaceVariant,
@@ -155,20 +160,26 @@ private fun ContactDrawerItem(
             leadingContent = {
                 if (contact.photoUri != null) {
                     AsyncImage(
-                        model = contact.photoUri,
+                        model = ImageRequest.Builder(context)
+                            .data(contact.photoUri)
+                            .size(168, 168)
+                            .crossfade(false)
+                            .memoryCacheKey(contact.photoUri)
+                            .build(),
                         contentDescription = contact.name,
                         modifier = Modifier.size(56.dp).clip(CircleShape)
                     )
                 } else {
-                    Surface(
-                        shape = CircleShape,
-                        color = MaterialTheme.colorScheme.primaryContainer,
-                        modifier = Modifier.size(56.dp)
+                    Box(
+                        modifier = Modifier
+                            .size(56.dp)
+                            .background(MaterialTheme.colorScheme.primaryContainer, CircleShape),
+                        contentAlignment = Alignment.Center
                     ) {
                         Icon(
                             imageVector = Icons.Default.Call,
                             contentDescription = null,
-                            modifier = Modifier.padding(12.dp),
+                            modifier = Modifier.size(28.dp),
                             tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
@@ -188,7 +199,7 @@ private fun ContactDrawerItem(
                 }
             },
             colors = ListItemDefaults.colors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant
+                containerColor = Color.Transparent
             ),
             modifier = Modifier.padding(vertical = 4.dp)
         )
